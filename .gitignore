@@ -6,6 +6,7 @@
 .nvmrc
 .envrc
 node_modules
+dist
 migrations
 coverage
 errors-*.log

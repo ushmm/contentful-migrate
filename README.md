@@ -66,7 +66,11 @@ For more information on schema migrations technique and practice, see:
 
 ## Installation
 
-To install this fork directly from its repository:
+Requires **Node.js >=22.13.0**. TypeScript sources in `src/` build to CommonJS in
+`dist/`; the installed `ctf-migrate` executable runs `dist/cli.js`. User migration
+scripts remain CommonJS JavaScript with `description`, `up`, and `down` exports.
+
+To install this fork directly from its repository (the prepare script builds it):
 
 ```sh
 npm install -g git+https://github.com/ushmm/contentful-migrate.git
@@ -107,7 +111,10 @@ If the target space already has been init'd before, it will throw an error:
 ### bootstrap
 
 Create your migration files for content models already in your space. It gives you the option to squash any previous migration state.
-Note: It will delete any existing migration scripts and create a consolidated one for each specified content type.
+
+> **ATTENTION**: Bootstrap first generates replacement scripts in a staging area, then replaces the selected
+> content types' existing scripts (or the whole migrations directory with `--all`). Replacement is destructive even if
+> you decline the remote state rewrite, and there is no dry-run option. Back up and review the target directory first.
 
 ```
   Usage: ctf-migrate bootstrap [options]
@@ -221,6 +228,18 @@ information on how to run migrations, see [Running migrations](https://github.co
 
 ## Development
 
-See [AGENTS.md](AGENTS.md) for repository structure, coding conventions, local verification,
-and Contentful safety precautions. The [repository review](docs/repository-review.md)
-records known issues and recommended task-specific skills.
+```sh
+npm ci --ignore-scripts --no-audit --no-fund
+npm run build
+npm test                 # lint + Vitest unit tests; no Contentful credentials
+node dist/cli.js --help
+```
+
+Integration tests make real Contentful API calls and are skipped unless explicitly enabled
+with `CONTENTFUL_INTEGRATION_OPT_IN=true` plus `CONTENTFUL_INTEGRATION_MANAGEMENT_TOKEN`
+and `CONTENTFUL_INTEGRATION_SOURCE_SPACE` for a disposable space. Run them only with
+authorization via `npm run test:integration`; CI does not run them.
+
+See [AGENTS.md](AGENTS.md) for structure, conventions, and Contentful safety precautions.
+The [historical repository review](docs/repository-review.md) records the superseded
+pre-TypeScript baseline.
