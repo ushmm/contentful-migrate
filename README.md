@@ -1,12 +1,11 @@
 # Contentful Migrate Tool
 
-[![npm](https://img.shields.io/npm/v/contentful-migrate.svg)](https://www.npmjs.com/package/contentful-migrate)
-[![contentful-migration version](https://img.shields.io/npm/dependency-version/contentful-migrate/contentful-migration)](https://www.npmjs.com/package/contentful-migration)
-[![Build Status](https://github.com/deluan/contentful-migrate/workflows/CI/badge.svg)](https://github.com/deluan/contentful-migrate/actions)
-[![Downloads](https://img.shields.io/npm/dm/contentful-migrate)](https://www.npmjs.com/package/contentful-migrate)
+[![Build Status](https://github.com/ushmm/contentful-migrate/actions/workflows/main.yml/badge.svg)](https://github.com/ushmm/contentful-migrate/actions/workflows/main.yml)
 
-# NOTICE: This is a fork from the original contentful-migrate package
-# Our goal is to update the package based on our needs
+This is the [USHMM fork](https://github.com/ushmm/contentful-migrate) of Contentful Migrate,
+based on the Altitude-sports fork of the original tool by deluan.
+The package name remains `@devaltitude/contentful-migrate`; upstream npm badges are omitted
+because they do not describe releases of this repository.
 
 Manage your Contentful schema by creating incremental scripted changes. This project is based on the ideas exposed
 in [Contentful's CMS as Code article](https://www.contentful.com/r/knowledgebase/cms-as-code/)
@@ -67,9 +66,13 @@ For more information on schema migrations technique and practice, see:
 
 ## Installation
 
+To install this fork directly from its repository:
+
 ```sh
-npm install -g contentful-migrate
+npm install -g git+https://github.com/ushmm/contentful-migrate.git
 ```
+
+The unscoped `contentful-migrate` npm package installs the original project, not this fork.
 
 ## Usage
 
@@ -215,3 +218,9 @@ For more information on how to write migrations, see
 
 This tool is based on [node-migrate](https://github.com/tj/node-migrate). For more
 information on how to run migrations, see [Running migrations](https://github.com/tj/node-migrate#running-migrations)
+
+## Development
+
+See [AGENTS.md](AGENTS.md) for repository structure, coding conventions, local verification,
+and Contentful safety precautions. The [repository review](docs/repository-review.md)
+records known issues and recommended task-specific skills.
